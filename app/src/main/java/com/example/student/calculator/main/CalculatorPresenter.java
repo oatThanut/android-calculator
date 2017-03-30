@@ -9,6 +9,7 @@ import com.example.student.calculator.data.Calculator;
 public class CalculatorPresenter {
     private CalculatorView view;
     private Calculator calculator;
+    private String num;
 
     public static final int OPERATOR_ADD = Calculator.OPERATOR_ADD;
     public static final int OPERATOR_SUB = Calculator.OPERATOR_SUB;
@@ -23,12 +24,14 @@ public class CalculatorPresenter {
 
     public void reset() {
         calculator.reset();
+        this.num = "0";
         view.setCalculatorResult(calculator.getResult());
     }
 
     public void onNumberClick(int num) {
         calculator.setResult(num);
-        view.setCalculatorResult(num);
+        this.num += num;
+        view.setCalculatorResult(Integer.parseInt(this.num));
     }
 
     public void onOpClick(int op) {
@@ -36,6 +39,7 @@ public class CalculatorPresenter {
     }
 
     public void onResetClick() {
+        reset();
     }
 
     public void onBackClick() {
